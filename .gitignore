@@ -1,4 +1,4 @@
-node_modules
+Node_modules
 *.log
 *~
 .bundle/
@@ -15,7 +15,6 @@ galaxy/
 site/static/js
 .openshift/params/prod-cluster-credentials
 .DS_Store
-package-lock.json
 .idea
 .babel.json
 .bash_history
