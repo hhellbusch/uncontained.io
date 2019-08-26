@@ -1,0 +1,31 @@
+---
+title: "DevOps Reading List"
+date: 2019-04-30T15:47:00-05:00
+authors: [etsauer, trevorquinn, hhellbusch]
+categories:
+  - 'Implementation Guide'
+tags:
+  - openshift
+  - devops
+  - culture
+draft: false
+featured: true
+scripts: [pivottable/pivot.min.js, pivottable/tips_data.min.js]
+---
+
+<div id="output"></div>
+<script type="text/javascript">
+
+$(function(){
+    $("#output").pivotUI(
+        [
+            {color: "blue", shape: "circle"},
+            {color: "red", shape: "triangle"}
+        ],
+        {
+            rows: ["color"],
+            cols: ["shape"]
+        }
+    );
+ });
+</script>
