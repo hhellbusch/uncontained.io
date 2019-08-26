@@ -37,7 +37,7 @@
 	<script src="/js/toc.js"></script>
 	{{ if isset .Params "scripts" }}
 		{{ range .Params.scripts }}
-			<script src="{{ printf "js/%s" . | absURL }}"></script>
+			<script src="{{ printf "assets/%s" . | absURL }}"></script>
 		{{ end }}
 	{{ end }}
 

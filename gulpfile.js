@@ -110,14 +110,18 @@ gulp.task("search", (cb) => {
 // https://stackoverflow.com/questions/32418565/proper-way-of-copying-files-to-destination-with-gulp
 gulp.task("copy", (cb) => {
   //destDir: srcfiles
-  let bower = {
-    "jquery":"./node_modules/jquery/dist/jquery*.{js,map}"
+  let assets = {
+    // Do not include jquery! this gets loaded from a CDN
+    // in the layouts/partials/header.html
+    // "jquery":"./node_modules/jquery/dist/jquery*.{js,map}",
+    "pivottable":"./node_modules/pivottable/dist/pivot*.{js,map,css}"
   };
-  let destPath = './dist/js/';
-  for (var destinationDir in bower) {
-    let src = bower[destinationDir];
+  let destPath = './dist/assets/';
+  for (var destinationDir in assets) {
+    let src = assets[destinationDir];
     let dest = destPath + destinationDir;
-    console.log('src: ' + src + " ; dest: " + dest);
+    //useful for debugging...
+    // console.log('src: ' + src + " ; dest: " + dest);
     gulp.src(src).pipe(gulp.dest(dest));
   }
   cb();
