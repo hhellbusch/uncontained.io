@@ -107,12 +107,28 @@ gulp.task("search", (cb) => {
   cb();
 });
 
-gulp.task("build", gulp.series(gulp.parallel("sass", "js", "fonts", "asciidoctor-check"), "hugo", "search"));
-gulp.task("build-preview", gulp.series(gulp.parallel("sass", "js", "fonts", "asciidoctor-check"), "hugo", "search"));
+// https://stackoverflow.com/questions/32418565/proper-way-of-copying-files-to-destination-with-gulp
+gulp.task("copy", (cb) => {
+  //destDir: srcfiles
+  let bower = {
+    "jquery":"./node_modules/jquery/dist/jquery*.{js,map}"
+  };
+  let destPath = './dist/js/';
+  for (var destinationDir in bower) {
+    let src = bower[destinationDir];
+    let dest = destPath + destinationDir;
+    console.log('src: ' + src + " ; dest: " + dest);
+    gulp.src(src).pipe(gulp.dest(dest));
+  }
+  cb();
+});
+
+gulp.task("build", gulp.series(gulp.parallel("sass", "js", "fonts", "asciidoctor-check"), "hugo", "search", "copy"));
+gulp.task("build-preview", gulp.series(gulp.parallel("sass", "js", "fonts", "asciidoctor-check"), "hugo", "search", "copy"));
 
 // Run server tasks
-gulp.task("server", gulp.series(gulp.parallel("hugo", "sass", "js", "fonts", "asciidoctor-check"), "search", (cb) => runServer(cb)));
-gulp.task("server-preview", gulp.series(gulp.parallel("hugo-preview", "sass", "js", "fonts", "asciidoctor-check"), "search", (cb) => runServer(cb)));
+gulp.task("server", gulp.series(gulp.parallel("hugo", "sass", "js", "fonts", "asciidoctor-check"), "search", "copy", (cb) => runServer(cb)));
+gulp.task("server-preview", gulp.series(gulp.parallel("hugo-preview", "sass", "js", "fonts", "asciidoctor-check"), "search", "copy", (cb) => runServer(cb)));
 
 // Run Automated Tests
 gulp.task("smoke", gulp.series((cb) => runSmokeTest(cb)));
