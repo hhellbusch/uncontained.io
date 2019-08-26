@@ -17,7 +17,9 @@
   },
   "author": "",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "pivottable": "^2.23.0"
+  },
   "resolutions": {
     "natives": "1.1.3"
   },
